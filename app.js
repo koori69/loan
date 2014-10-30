@@ -10,9 +10,12 @@ var users = require('./routes/users');
 
 var app = express();
 
+var partials = require('express-partials');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(partials());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -56,5 +59,13 @@ app.use(function(err, req, res, next) {
     });
 });
 
+//app.get('/', routes.index);
+//app.get('u/:user', routes.user);
+//app.post('/post', routes.post);
+//app.get('/reg', routes.reg);
+//app.post('/reg', routes.doReg);
+//app.get('/login', routes.login);
+//app.post('/login', routes.doLogin);
+//app.get('/logout', routes.logout);
 
 module.exports = app;
