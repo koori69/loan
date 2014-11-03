@@ -11,11 +11,14 @@ var users = require('./routes/users');
 var app = express();
 
 var partials = require('express-partials');
+var mysession = require('express-session');
+var flash = require('connect-flash');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(partials());
+app.use(flash());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -24,6 +27,46 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+var MongoStore = require('connect-mongo')(mysession);
+var settings = require('./settings');
+
+// store session data in MongoDB
+app.use(mysession({
+    resave: false, // don't save session if unmodified
+    saveUninitialized: false, // don't create session until something stored
+    secret: settings.cookieSecret,
+    store: new MongoStore({
+        db: settings.db
+    })
+}));
+
+
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
+
+app.use(function (req, res, next) {
+    res.locals.user = req.session.user;
+    next();
+});
+
+app.use(function (req, res, next) {
+    res.locals.error = req.flash('error');
+    next();
+});
+
+app.use(function (req, res, next) {
+    res.locals.success = req.flash('success');
+    next();
+});
+
+app.use(partials());
 
 app.use('/', routes);
 app.use('/users', users);
@@ -51,13 +94,26 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
+
+//router.dynamicHelpers({
+//  user: function(req, res) {
+//    return req.session.user;
+//  },
+//  error: function(req, res) {
+//    var err = req.flash('error');
+//    if (err.length)
+//      return err;
+//    else
+//      return null;
+//  },
+//  success: function(req, res) {
+//    var succ = req.flash('success');
+//    if (succ.length)
+//      return succ;
+//    else
+//      return null;
+//  }
+//});
 
 //app.get('/', routes.index);
 //app.get('u/:user', routes.user);

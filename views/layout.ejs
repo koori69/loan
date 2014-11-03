@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <title><%= title %> - 乐融</title>
+    <title>乐融</title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
     <style type="text/css">
       body {
@@ -35,6 +35,16 @@
     </div>
 
     <div id="container" class="container">
+      <% if (success) { %>
+        <div class="alert alert-success">
+          <%= success %>
+        </div>
+      <% } %>
+      <% if (error) { %>
+        <div class="alert alert-error">
+          <%= error %>
+        </div>
+      <% } %>
       <%- body %>
       <hr />
       <footer>

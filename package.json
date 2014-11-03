@@ -13,6 +13,10 @@
     "serve-favicon": "~2.1.3",
     "debug": "~2.0.0",
     "ejs": "~0.8.5",
-    "express-partials": "*"
+    "express-partials": "*",
+    "mongodb": ">= 0.9.9",
+    "connect-mongo": "*",
+    "express-session": "*",
+    "connect-flash": "*"
   }
 }
