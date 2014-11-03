@@ -57,12 +57,20 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (req, res, next) {
-    res.locals.error = req.flash('error');
+    err = req.flash('error');
+    if (err.length)
+        res.locals.error = err;
+    else
+        res.locals.error = null;
     next();
 });
 
 app.use(function (req, res, next) {
-    res.locals.success = req.flash('success');
+    succ = req.flash('success');
+    if (succ.length)
+        res.locals.success = succ;
+    else
+        res.locals.success = null;
     next();
 });
 

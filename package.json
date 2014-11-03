@@ -1,6 +1,6 @@
 {
   "name": "loan",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -17,6 +17,7 @@
     "mongodb": ">= 0.9.9",
     "connect-mongo": "*",
     "express-session": "*",
-    "connect-flash": "*"
+    "connect-flash": "*",
+    "crypto": "*"
   }
 }
