@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <title>乐融</title>
+    <title><%= title %> - 乐融</title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
     <style type="text/css">
       body {
@@ -26,8 +26,17 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"><a href="/">首页</a></li>
-              <li><a href="/login">登录</a></li>
-              <li><a href="/reg">注册</a></li>
+              <% if (!user) { %>
+                <li><a href="/login">登录</a></li>
+                <li><a href="/reg">注册</a></li>
+              <% } else { %>
+                <li><a>欢迎您，<%= user.name %></a></li>
+                <li><a href="/pool">资金池</a></li>
+                <li><a href="/detailed">借款明细</a></li>
+                <li><a href="/borrower">借款人</a></li>
+                <li><a href="/pawn">抵押物</a></li>
+                <li><a href="/logout">登出</a></li>
+              <% } %>
             </ul>
           </div>
         </div>

@@ -1,16 +1,20 @@
-<div class="hero-unit">
-  <h1>欢迎来到 乐融小额贷款公司</h1>
-  <p>乐融是一个基于Node.js的系统</p>
-  <p>
-    <a class="btn btn-primary btn-large" href="/login">登录</a>
-    <a class="btn btn-large" href="/reg">立即注册</a>
-  </p>
-</div>
+<% if (!user) { %>
+    <div class="hero-unit">
+      <h1>欢迎来到 乐融小额贷款公司</h1>
+      <p>乐融是一个基于Node.js的系统</p>
+      <p>
+        <a class="btn btn-primary btn-large" href="/login">登录</a>
+        <a class="btn btn-large" href="/reg">立即注册</a>
+      </p>
+    </div>
 
-<div class="row">
-  <div class="span4">
-    <h2>iT2afL0rd 说</h2>
-     <p>东风破早梅 向暖一枝开</p>
-     <p>冰雪无人见 春从天上来</p>
-  </div>
-</div>
+    <div class="row">
+      <div class="span4">
+        <h2>iT2afL0rd 说</h2>
+         <p>东风破早梅 向暖一枝开</p>
+         <p>冰雪无人见 春从天上来</p>
+      </div>
+    </div>
+<% } else { %>
+  <%- partial('main') %>
+<% } %>

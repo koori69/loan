@@ -86,6 +86,34 @@ router.post('/reg', function(req, res) {
     res.redirect('/');
   });
 
+  router.get('/pool', checkLogin);
+  router.get('/pool', function(req, res) {
+    res.render('pool', {
+      title: '资金池'
+    });
+  });
+
+  router.get('/detailed', checkLogin);
+  router.get('/detailed', function(req, res) {
+    res.render('detailed', {
+      title: '借款明细'
+    });
+  });
+
+  router.get('/borrower', checkLogin);
+  router.get('/borrower', function(req, res) {
+    res.render('borrower', {
+      title: '借款人'
+    });
+  });
+
+  router.get('/pawn', checkLogin);
+  router.get('/pawn', function(req, res) {
+    res.render('pawn', {
+      title: '抵押物'
+    });
+  });
+
 function checkLogin(req, res, next) {
   if (!req.session.user) {
     req.flash('error', '未登录');

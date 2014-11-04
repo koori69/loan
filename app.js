@@ -100,36 +100,4 @@ if (app.get('env') === 'development') {
     });
 }
 
-// production error handler
-// no stacktraces leaked to user
-
-//router.dynamicHelpers({
-//  user: function(req, res) {
-//    return req.session.user;
-//  },
-//  error: function(req, res) {
-//    var err = req.flash('error');
-//    if (err.length)
-//      return err;
-//    else
-//      return null;
-//  },
-//  success: function(req, res) {
-//    var succ = req.flash('success');
-//    if (succ.length)
-//      return succ;
-//    else
-//      return null;
-//  }
-//});
-
-//app.get('/', routes.index);
-//app.get('u/:user', routes.user);
-//app.post('/post', routes.post);
-//app.get('/reg', routes.reg);
-//app.post('/reg', routes.doReg);
-//app.get('/login', routes.login);
-//app.post('/login', routes.doLogin);
-//app.get('/logout', routes.logout);
-
 module.exports = app;
