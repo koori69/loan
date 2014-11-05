@@ -93,6 +93,13 @@ router.post('/reg', function(req, res) {
     });
   });
 
+  router.get('/pool_insert', checkLogin);
+  router.get('/pool_insert', function(req, res) {
+    res.render('pool_insert', {
+      title: '资金池-注入'
+    });
+  });
+
   router.get('/detailed', checkLogin);
   router.get('/detailed', function(req, res) {
     res.render('detailed', {
