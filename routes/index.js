@@ -100,6 +100,28 @@ router.get('/', function(req, res) {
     });
   });
 
+router.get('/pool_insert', checkLogin);
+router.post("/pool_insert", function (req, res) {
+    if (!req.body.funder) {
+        req.flash("error", "出资人不能为空");
+        return res.redirect("/pool_insert");
+    }
+    if (!req.body.amount) {
+        req.flash("error", "金额不能为空");
+        return res.redirect("/pool_insert");
+    }
+    if (!req.body.in_date) { // default should set to current time
+        req.flash("error", "出资时间不能为空");
+        return res.redirect("/pool_insert");
+    }
+    if (req.body.out_reserved == "是" && !req.body.out_date) {
+        req.flash("error", "约定抽出日期不能为空");
+        return res.redirect("/pool_insert");
+    }
+    req.flash("success", "注入成功");
+    return res.redirect("/pool_insert")
+});
+
   router.get('/detailed', checkLogin);
   router.get('/detailed', function(req, res) {
     res.render('detailed', {
