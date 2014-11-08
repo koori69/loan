@@ -99,7 +99,18 @@ router.get('/pool', function(req, res) {
         value: 80
     });
 
+    var newTrans = new Trans ({
+        funder: "孙权",
+        type: "IN",
+        amount: null,
+        date: null
+    });
+
     console.log(testdata);
+    Trans.get(newTrans.funder, function(err, allDoc) {
+        console.log(allDoc);
+    });
+
     res.render('pool', {
         title: '资金池',
         data: testdata

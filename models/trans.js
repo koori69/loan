@@ -66,3 +66,54 @@ Trans.prototype.save = function save(callback) {
         });
     });
 };
+
+Trans.get = function get(name, callback) {
+    mongodb.open(function(err, db) {
+        if (err) {
+            return callback(err);
+        }
+
+        console.log("Trans.get, Open MongoDB succeed.");
+        db.collection('transaction', function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);
+            }
+
+            collection.find({funder: name}).toArray(function (err, docs) {
+                mongodb.close();
+                if (docs) {
+                    callback(err, docs);
+                } else {
+                    callback(err, null);
+                }
+            });
+        });
+    });
+};
+
+//Trans.withdraw = function withdraw(name, callback) {
+//    mongodb.open(function(err, db) {
+//        if (err) {
+//            return callback(err);
+//        }
+//
+//        console.log("Open MongoDB succeed.");
+//        db.collection('transaction', function (err, collection) {
+//            if (err) {
+//                mongodb.close();
+//                return callback(err);
+//            }
+//
+//            collection.findOne({funder: name}, function (err, doc) {
+//                mongodb.close();
+//                if (doc) {
+//                    var trans = new Trans(doc);
+//                    callback(err, trans);
+//                } else {
+//                    callback(err, null);
+//                }
+//            });
+//        });
+//    });
+//};
