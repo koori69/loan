@@ -87,12 +87,24 @@ router.get('/', function(req, res) {
     res.redirect('/');
   });
 
-  router.get('/pool', checkLogin);
-  router.get('/pool', function(req, res) {
-    res.render('pool', {
-      title: '资金池'
+router.get('/pool', checkLogin);
+router.get('/pool', function(req, res) {
+    function TestData(data) {
+        this.name = data.name;
+        this.value = data.value;
+    }
+
+    var testdata = new TestData({
+        name: "孙权",
+        value: 80
     });
-  });
+
+    console.log(testdata);
+    res.render('pool', {
+        title: '资金池',
+        data: testdata
+    });
+});
 
   router.get('/pool_insert', checkLogin);
   router.get('/pool_insert', function(req, res) {
