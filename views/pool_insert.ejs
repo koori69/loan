@@ -4,13 +4,21 @@
     <div class="control-group">
       <label class="control-label" for="funder">注资人</label>
       <div class="controls">
-        <input type="text" class="input-xlarge" id="funder" name="funder">
+        <input type="text" class="input-xlarge" id="funder" name="funder" required="">
+        <span class="help-inline">必填</span>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group warning">
       <label class="control-label" for="amount">注入金额</label>
       <div class="controls">
         <input type="number" class="input-xlarge" id="amount" name="amount">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="interest">资金费用</label>
+      <div class="controls">
+        <input type="number" class="input-xlarge" id="interest" name="interest" placeholder="资金每月产生的收益">
+        <span class="help-inline">准备抽出的资金，这里是一次性费用</span>
       </div>
     </div>
     <div class="control-group">
@@ -22,20 +30,32 @@
     <div class="control-group">
       <label class="control-label" for="out_reserved">准备抽出</label>
       <div class="controls">
-          <select class="input-xlarge" id="out_reserved" name="out_reserved">
-              <option>是</option>
-              <option>否</option>
+          <select class="input-xlarge" id="out_reserved" name="out_reserved" onchange="onSelected(this);">
+              <option value="1">是</option>
+              <option value="0" selected>否</option>
           </select>
+          <span class="help-inline">资金是否准备抽出，是需要填写抽出时间</span>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="out_date">抽出日期</label>
       <div class="controls">
-        <input type="date" class="input-xlarge" id="out_date" name="out_date">
+        <input type="date" class="input-xlarge" id="out_date" name="out_date" placeholder="资金不准备抽出时不填" disabled>
       </div>
     </div>
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">注入</button>
+      <button type="submit" class="btn btn-large btn-primary">注入</button>
     </div>
   </fieldset>
 </form>
+
+<script>
+    function onSelected(obj) {
+        if($(obj).val() == 0){
+            $('#out_date').attr('disabled',"disabled");
+        }
+        else {
+            $('#out_date').removeAttr("disabled");
+        }
+    }
+</script>

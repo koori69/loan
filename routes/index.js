@@ -2,6 +2,7 @@ var express = require('express');
 var crypto = require('crypto');
 var router = express.Router();
 var User = require('../models/user.js');
+var Trans = require("../models/trans.js");
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -118,8 +119,26 @@ router.post("/pool_insert", function (req, res) {
         req.flash("error", "约定抽出日期不能为空");
         return res.redirect("/pool_insert");
     }
-    req.flash("success", "注入成功");
-    return res.redirect("/pool_insert")
+
+    console.log("All body verified.");
+    var newTrans = new Trans ({
+        funder: req.body.funder,
+        type: "IN",
+        amount: req.body.amount,
+        date: req.body.in_date
+    });
+
+    console.log(newTrans);
+    console.log("Start to push to MongoDB.");
+    newTrans.save(function(err) {
+        if (err) {
+            console.log("Save trans error.");
+            req.flash("error", "注入失败");
+            return res.redirect("/pool_insert");
+        }
+        req.flash("success", "注入成功");
+        return res.redirect("/pool_insert");
+    });
 });
 
   router.get('/detailed', checkLogin);
