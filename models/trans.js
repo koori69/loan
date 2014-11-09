@@ -10,7 +10,7 @@ function Trans(trans) {
     this.fee = trans.fee;
     this.date = trans.date;
     this.reserved = trans.reserved;
-    this.reserve_date = trans.reserve_date;
+    this.reserved_date = trans.reserved_date;
 }
 
 if (typeof transType == "undefined") {
@@ -26,10 +26,10 @@ Trans.prototype.save = function save(callback) {
         owner: this.owner,
         type: this.type,
         amount: Number(this.amount),
-        fee: this.fee,
+        fee: Number(this.fee),
         reserved: this.reserved,
         date: this.date,
-        reserved_date: this.reserve_date
+        reserved_date: this.reserved_date
     };
 
     mongodb.open(function (err, db) {

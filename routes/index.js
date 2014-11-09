@@ -107,6 +107,7 @@ router.get('/pool', function(req, res) {
 
 router.get('/pool_insert', checkLogin);
 router.post("/pool_insert", function (req, res) {
+    console.log(req.body);
     if (!req.body.funder) {
         req.flash("error", "出资人不能为空");
         return res.redirect("/pool_insert");
