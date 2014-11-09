@@ -89,32 +89,40 @@ router.get('/', function(req, res) {
 
 router.get('/pool', checkLogin);
 router.get('/pool', function(req, res) {
-    function TestData(data) {
-        this.name = data.name;
-        this.value = data.value;
-    }
-
-    var testdata = new TestData({
-        name: "孙权",
-        value: 80
+    Trans.getAll(function(err, allDoc) {
+        totalFund = summaries(allDoc);
+        res.render('pool', {
+            title: '资金池',
+            fund: totalFund
+        });
     });
 
-    var newTrans = new Trans ({
-        funder: "孙权",
-        type: "IN",
-        amount: null,
-        date: null
-    });
-
-    console.log(testdata);
-    Trans.get(newTrans.funder, function(err, allDoc) {
-        console.log(allDoc);
-    });
-
-    res.render('pool', {
-        title: '资金池',
-        data: testdata
-    });
+//    var MongoDB = {
+//        pool: {
+//            reserved: 100000,
+//            fund: {
+//                "孙权": 10000
+//            },
+//            interest: {
+//                "孙权": 100
+//            }
+//        },
+//        fund_history: [ {
+//                "funder": "孙权",
+//                "type": "IN",
+//                "amount": 10000,
+//                "inrerest": 100,
+//                "in_date": "2014/11/06",
+//                "out_or_not": "是",
+//                "out_date": "2014/12/06"
+//            }, {
+//                "funder": "孙权"
+//            }
+//        ],
+//        interest_history: {
+//
+//        }
+//    };
 });
 
   router.get('/pool_insert', checkLogin);
@@ -200,36 +208,26 @@ function checkNotLogin(req, res, next) {
   }
   next();
 }
-//router.get('/u/:user', function(req, res) {
-//  res.render('index', { title: user });
-//});
-//exports.user = function(req, res) {
-//
-//};
-//
-//exports.post = function(req, res) {
-//
-//};
-//
-//exports.reg = function(req, res) {
-//
-//};
-//
-//exports.doReg = function(req, res) {
-//
-//};
-//
-//exports.login = function(req, res) {
-//
-//};
-//
-//exports.doLogin = function (req, res) {
-//
-//};
-//
-//exports.logout = function (req, res) {
-//
-//};
+
+function summaries(transHistory) {
+    var totalFund = {};
+    for (var index = 0; index < transHistory.length; index ++) {
+        history = transHistory[index];
+        console.log(history);
+        console.log(!totalFund[history["funder"]]);
+        if (!totalFund[history["funder"]]) {
+            totalFund[history["funder"]] = 0;
+        }
+
+        if (history["type"] == "IN") {
+            totalFund[history["funder"]] += Number(history["amount"]);
+        } else {
+            totalFund[history["funder"]] -= Number(history["amount"]);
+        }
+    }
+    console.log(totalFund);
+    return totalFund;
+}
 
 module.exports = router;
 

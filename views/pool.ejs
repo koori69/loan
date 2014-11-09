@@ -20,9 +20,17 @@
         function (ec) {
             // 基于准备好的dom，初始化echarts图表
             var myChart = ec.init(document.getElementById('main'));
+            var newName = new Array();
+            var newValue = new Array();
+            var newData = new Array();
+            var totalFund = JSON.parse('<%- JSON.stringify(locals.fund)%>');
 
-            var test_name = "<%= data.name %>";
-            var test_value = "<%= data.value %>";
+            for (var key in totalFund) {
+                newName.push(key);
+                newValue.push(totalFund[key]);
+                newData.push({name: key, value: totalFund[key]});
+            }
+
 
             var option = {
                 title : {
@@ -37,7 +45,7 @@
                 legend: {
                     x : 'center',
                     y : 'bottom',
-                    data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+                    data: newName//['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
                 },
                 toolbox: {
                     show : true,
@@ -55,7 +63,7 @@
                         type:'pie',
                         radius : [40, 200],
                         center : ['50%', 300],
-                        roseType : 'radius',
+                        roseType : 'area',
 //                        itemStyle : {
 //                            normal : {
 //                                label : {
@@ -74,16 +82,17 @@
 //                                }
 //                            }
 //                        },
-                        data:[
-                            { value: test_value, name: test_name },
-                            {value:5, name:'rose2'},
-                            {value:15, name:'rose3'},
-                            {value:25, name:'rose4'},
-                            {value:20, name:'rose5'},
-                            {value:35, name:'rose6'},
-                            {value:30, name:'rose7'},
-                            {value:40, name:'rose8'}
-                        ]
+                          data: newData
+//                        data:[
+//                            { value: test_value, name: test_name },
+//                            {value:5, name:'rose2'},
+//                            {value:15, name:'rose3'},
+//                            {value:25, name:'rose4'},
+//                            {value:20, name:'rose5'},
+//                            {value:35, name:'rose6'},
+//                            {value:30, name:'rose7'},
+//                            {value:40, name:'rose8'}
+//                        ]
                     }//,
 //                    {
 //                        name:'面积模式',
