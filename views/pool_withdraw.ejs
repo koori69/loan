@@ -1,0 +1,62 @@
+<form class="form-horizontal" method="post">
+  <fieldset>
+    <legend>提取资金</legend>
+    <div class="control-group">
+      <label class="control-label" for="withdrawer">提取人</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="withdrawer" name="withdrawer" required="">
+        <span class="help-inline">必填</span>
+      </div>
+    </div>
+    <div class="control-group warning">
+      <label class="control-label" for="amount">提取金额</label>
+      <div class="controls">
+        <input type="number" class="input-xlarge" id="amount" name="amount">
+      </div>
+    </div>
+    <!--<div class="control-group">-->
+      <!--<label class="control-label" for="interest">资金费用</label>-->
+      <!--<div class="controls">-->
+        <!--<input type="number" class="input-xlarge" id="interest" name="interest" placeholder="资金每月产生的收益">-->
+        <!--<span class="help-inline">准备抽出的资金，这里是一次性费用</span>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="control-group">
+      <label class="control-label" for="withdraw_date">提取日期</label>
+      <div class="controls">
+        <input type="date" class="input-xlarge" id="withdraw_date" name="withdraw_date">
+        <span class="help-inline">日期格式：年/月/日，比如：2014/06/01</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="fund_type">资金类型</label>
+      <div class="controls">
+          <select class="input-xlarge" id="fund_type" name="fund_type" onchange="onSelected(this);">
+              <option value="本金">本金</option>
+              <option value="利息" selected>利息</option>
+          </select>
+          <span class="help-inline">提取的资金类型，本金还是利息</span>
+      </div>
+    </div>
+    <!--<div class="control-group">-->
+      <!--<label class="control-label" for="out_date">抽出日期</label>-->
+      <!--<div class="controls">-->
+        <!--<input type="date" class="input-xlarge" id="out_date" name="out_date" placeholder="资金不准备抽出时不填" disabled>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-large btn-primary">提取</button>
+    </div>
+  </fieldset>
+</form>
+
+<script>
+    function onSelected(obj) {
+        if($(obj).val() == "利息"){
+            $('#out_date').attr('disabled',"disabled");
+        }
+        else {
+            $('#out_date').removeAttr("disabled");
+        }
+    }
+</script>

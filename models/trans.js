@@ -4,10 +4,13 @@
 var mongodb = require("./db");
 
 function Trans(trans) {
-    this.funder = trans.funder;
+    this.owner = trans.owner;
     this.type = trans.type; // in or out
     this.amount = trans.amount;
+    this.fee = trans.fee;
     this.date = trans.date;
+    this.reserved = trans.reserved;
+    this.reserve_date = trans.reserve_date;
 }
 
 if (typeof transType == "undefined") {
@@ -20,10 +23,13 @@ module.exports = Trans;
 
 Trans.prototype.save = function save(callback) {
     var trans = {
-        funder: this.funder,
+        owner: this.owner,
         type: this.type,
         amount: Number(this.amount),
-        date: this.date
+        fee: this.fee,
+        reserved: this.reserved,
+        date: this.date,
+        reserved_date: this.reserve_date
     };
 
     mongodb.open(function (err, db) {
@@ -60,7 +66,7 @@ Trans.get = function get(name, callback) {
                 return callback(err);
             }
 
-            collection.find({funder: name}).toArray(function (err, docs) {
+            collection.find({owner: name}).toArray(function (err, docs) {
                 mongodb.close();
                 if (docs) {
                     callback(err, docs);
@@ -96,29 +102,3 @@ Trans.getAll = function getAll(callback) {
         });
     });
 };
-
-//Trans.withdraw = function withdraw(name, callback) {
-//    mongodb.open(function(err, db) {
-//        if (err) {
-//            return callback(err);
-//        }
-//
-//        console.log("Open MongoDB succeed.");
-//        db.collection('transaction', function (err, collection) {
-//            if (err) {
-//                mongodb.close();
-//                return callback(err);
-//            }
-//
-//            collection.findOne({funder: name}, function (err, doc) {
-//                mongodb.close();
-//                if (doc) {
-//                    var trans = new Trans(doc);
-//                    callback(err, trans);
-//                } else {
-//                    callback(err, null);
-//                }
-//            });
-//        });
-//    });
-//};

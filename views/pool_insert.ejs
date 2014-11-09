@@ -32,8 +32,8 @@
       <label class="control-label" for="out_reserved">准备抽出</label>
       <div class="controls">
           <select class="input-xlarge" id="out_reserved" name="out_reserved" onchange="onSelected(this);">
-              <option value="1">是</option>
-              <option value="0" selected>否</option>
+              <option value="是">是</option>
+              <option value="否" selected>否</option>
           </select>
           <span class="help-inline">资金是否准备抽出，选择是需要填写抽出时间</span>
       </div>
@@ -52,7 +52,7 @@
 
 <script>
     function onSelected(obj) {
-        if($(obj).val() == 0){
+        if($(obj).val() == "否"){
             $('#out_date').attr('disabled',"disabled");
         }
         else {

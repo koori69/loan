@@ -96,33 +96,6 @@ router.get('/pool', function(req, res) {
             fund: totalFund
         });
     });
-
-//    var MongoDB = {
-//        pool: {
-//            reserved: 100000,
-//            fund: {
-//                "孙权": 10000
-//            },
-//            interest: {
-//                "孙权": 100
-//            }
-//        },
-//        fund_history: [ {
-//                "funder": "孙权",
-//                "type": "IN",
-//                "amount": 10000,
-//                "inrerest": 100,
-//                "in_date": "2014/11/06",
-//                "out_or_not": "是",
-//                "out_date": "2014/12/06"
-//            }, {
-//                "funder": "孙权"
-//            }
-//        ],
-//        interest_history: {
-//
-//        }
-//    };
 });
 
   router.get('/pool_insert', checkLogin);
@@ -153,10 +126,13 @@ router.post("/pool_insert", function (req, res) {
 
     console.log("All body verified.");
     var newTrans = new Trans ({
-        funder: req.body.funder,
+        owner: req.body.funder,
         type: "IN",
         amount: req.body.amount,
-        date: req.body.in_date
+        date: req.body.in_date,
+        reserved: req.body.out_reserved,
+        reserved_date: req.body.out_date,
+        fee: req.body.interest
     });
 
     console.log(newTrans);
@@ -169,6 +145,70 @@ router.post("/pool_insert", function (req, res) {
         }
         req.flash("success", "注入成功");
         return res.redirect("/pool_insert");
+    });
+});
+
+router.get('/pool_withdraw', checkLogin);
+router.get('/pool_withdraw', function(req, res) {
+    res.render('pool_withdraw', {
+        title: '资金池-提取'
+    });
+});
+
+router.get('/pool_withdraw', checkLogin);
+router.post("/pool_withdraw", function (req, res) {
+    console.log(req.body);
+    if (!req.body.withdrawer) {
+        req.flash("error", "提取人不能为空");
+        return res.redirect("/pool_withdraw");
+    }
+    if (!req.body.amount) {
+        req.flash("error", "提取金额不能为空");
+        return res.redirect("/pool_withdraw");
+    }
+    if (!req.body.withdraw_date) { // default should set to current time
+        req.flash("error", "提取时间不能为空");
+        return res.redirect("/pool_withdraw");
+    }
+
+    if (req.body.fund_type == "利息") {
+        req.flash("error", "暂不支持提取利息");
+        return res.redirect("/pool_withdraw");
+    }
+    // TODO: need to verify if withdraw amount is larger than
+    Trans.getAll(function(err, allDoc) {
+        console.log("start getAll in pool_withdraw");
+        totalFund = summaries(allDoc);
+        if (!totalFund[req.body.withdrawer]) {
+            req.flash("error", "提取人不存在");
+            return res.redirect("/pool_withdraw");
+        } else if (totalFund[req.body.withdrawer] < Number(req.body.amount)) {
+            req.flash("error", "余额不足");
+            return res.redirect("/pool_withdraw");
+        }
+        console.log("All body verified.");
+        var newTrans = new Trans ({
+            owner: req.body.withdrawer,
+            type: "OUT",
+            amount: req.body.amount,
+            date: req.body.withdraw_date,
+            reserved: null,
+            reserved_date: null,
+            fee: null
+        });
+
+        console.log(newTrans);
+        console.log("Start to push to MongoDB.");
+        newTrans.save(function(err) {
+            if (err) {
+                console.log("Save trans error.");
+                req.flash("error", "注入失败");
+                return res.redirect("/pool_withdraw");
+            }
+            req.flash("success", "注入成功");
+            return res.redirect("/pool_withdraw");
+        });
+
     });
 });
 
@@ -214,15 +254,15 @@ function summaries(transHistory) {
     for (var index = 0; index < transHistory.length; index ++) {
         history = transHistory[index];
         console.log(history);
-        console.log(!totalFund[history["funder"]]);
-        if (!totalFund[history["funder"]]) {
-            totalFund[history["funder"]] = 0;
+        console.log(!totalFund[history["owner"]]);
+        if (!totalFund[history["owner"]]) {
+            totalFund[history["owner"]] = 0;
         }
 
         if (history["type"] == "IN") {
-            totalFund[history["funder"]] += Number(history["amount"]);
+            totalFund[history["owner"]] += Number(history["amount"]);
         } else {
-            totalFund[history["funder"]] -= Number(history["amount"]);
+            totalFund[history["owner"]] -= Number(history["amount"]);
         }
     }
     console.log(totalFund);
