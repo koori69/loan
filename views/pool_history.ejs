@@ -1,0 +1,44 @@
+<table class="table table-striped">
+    <caption>资金注入历史记录</caption>
+    <thead>
+        <tr>
+            <th>注资人</th>
+            <th>金额</th>
+            <th>日期</th>
+            <th>资金费用</th>
+            <th>是否抽出</th>
+            <th>抽出日期</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% fundin.forEach(function (in_history, index) { %>
+        <tr>
+            <td><%= in_history.owner %></td>
+            <td><%= in_history.amount %></td>
+            <td><%= in_history.date %></td>
+            <td><%= in_history.fee %></td>
+            <td><%= in_history.reserved %></td>
+            <td><%= in_history.reserved_date %></td>
+        </tr>
+<%  }) %>
+    </tbody>
+</table>
+<table class="table table-striped">
+    <caption>资金提取历史记录</caption>
+    <thead>
+        <tr>
+            <th>提取人</th>
+            <th>金额</th>
+            <th>日期</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% fundout.forEach(function (out_history, index) { %>
+        <tr>
+            <td><%= out_history.owner %></td>
+            <td><%= out_history.amount %></td>
+            <td><%= out_history.date %></td>
+        </tr>
+<%  }) %>
+    </tbody>
+</table>

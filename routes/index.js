@@ -213,6 +213,29 @@ router.post("/pool_withdraw", function (req, res) {
     });
 });
 
+router.get('/pool_history', checkLogin);
+router.get('/pool_history', function(req, res) {
+    Trans.getAll(function (err, allDoc) {
+        var in_history = new Array();
+        var out_history = new Array();
+        for (var index = 0; index < allDoc.length; index ++) {
+            history = allDoc[index];
+            if (history.type == "IN") {
+                in_history.push(history);
+            } else {
+                out_history.push(history);
+            }
+        }
+        console.log(in_history);
+        console.log(out_history);
+        res.render('pool_history', {
+            title: '资金池-历史记录',
+            fundin: in_history,
+            fundout: out_history
+        });
+    });
+});
+
   router.get('/detailed', checkLogin);
   router.get('/detailed', function(req, res) {
     res.render('detailed', {
