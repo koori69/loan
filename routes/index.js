@@ -236,6 +236,24 @@ router.get('/pool_history', function(req, res) {
     });
 });
 
+router.post('/pool_test', checkLogin);
+router.post('/pool_test', function(req, res) {
+    console.log(req.body);
+    res.json({
+        "total_rows": "200",
+        "page_data": [
+            {
+                customer_id: 1001,
+                lastname: "操",
+                firstname: "曹",
+                email: "caocao@gmail.com",
+                genfer: "男",
+                date_updated: "2014-11-10"
+            }
+        ]
+    })
+});
+
   router.get('/detailed', checkLogin);
   router.get('/detailed', function(req, res) {
     res.render('detailed', {
