@@ -236,6 +236,32 @@ router.get('/pool_history', function(req, res) {
     });
 });
 
+router.get('/detailed_insert', checkLogin);
+router.get('/detailed_insert', function(req, res) {
+    res.render('detailed_insert', {
+        title: '借款明细-导入'
+    });
+});
+
+router.get('/detailed_insert', checkLogin);
+
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+router.post("/detailed_insert", multipartMiddleware, function(req, res) {
+    console.log("File uploaded: " + req.files.upload_excel.name);
+//    var obj = req.files.uploadImg;
+//    var tmp_path = obj.path;
+//    var new_path = "./public/images/"+obj.name;
+//    console.log("原路径："+tmp_path);
+//    fs.rename(tmp_path, new_path,function(err){
+//        if(err){
+//            throw err;
+//        }
+//    });
+    req.flash("success", "导入成功");
+    return res.redirect("/detailed_insert");
+});
+
 //router.post('/pool_test', checkLogin);
 //router.post('/pool_test', function(req, res) {
 //    console.log(req.body);
