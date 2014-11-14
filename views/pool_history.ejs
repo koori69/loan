@@ -1,5 +1,23 @@
-<table class="table table-striped">
-    <caption>资金注入历史记录</caption>
+<div class="row-fluid">
+    <h2>资金注入历史记录</h2>
+    <div>
+        <ul class="breadcrumb">
+            <li>
+                基本功能：
+            </li>
+            <li>
+                分页 <span class="divider">/</span>
+            </li>
+            <li>
+                排序 <span class="divider">/</span>
+            </li>
+            <li>
+                过滤
+            </li>
+        </ul>
+    </div>
+    <table class="table table-striped datatable" id="history">
+    <!--<caption>资金注入历史记录</caption>-->
     <thead>
         <tr>
             <th>注资人</th>
@@ -42,3 +60,11 @@
 <%  }) %>
     </tbody>
 </table>
+</div>
+<script>
+    $(document).ready(function() {
+    $('#history').dataTable( {
+        "oPaginate": "bootstrap"
+    } );
+} );
+</script>
