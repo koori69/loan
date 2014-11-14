@@ -1,0 +1,62 @@
+<form class="form-horizontal" method="post">
+  <fieldset>
+    <legend>导入借款明细</legend>
+    <div class="control-group">
+      <label class="control-label" for="funder">借款人</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="funder" name="funder" required="">
+        <span class="help-inline">必填</span>
+      </div>
+    </div>
+    <div class="control-group warning">
+      <label class="control-label" for="amount">注入金额</label>
+      <div class="controls">
+        <input type="number" class="input-xlarge" id="amount" name="amount" required>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="interest">资金费用</label>
+      <div class="controls">
+        <input type="number" class="input-xlarge" id="interest" name="interest" placeholder="资金每月产生的收益">
+        <span class="help-inline">准备抽出的资金，这里是一次性费用</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="in_date">注资日期</label>
+      <div class="controls">
+        <input type="date" class="input-xlarge" id="in_date" name="in_date">
+        <span class="help-inline">日期格式：年/月/日，比如：2014/06/01</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="out_reserved">准备抽出</label>
+      <div class="controls">
+          <select class="input-xlarge" id="out_reserved" name="out_reserved" onchange="onSelected(this);">
+              <option value="是">是</option>
+              <option value="否" selected>否</option>
+          </select>
+          <span class="help-inline">资金是否准备抽出，选择是需要填写抽出时间</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="out_date">抽出日期</label>
+      <div class="controls">
+        <input type="date" class="input-xlarge" id="out_date" name="out_date" placeholder="资金不准备抽出时不填" disabled>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-large btn-primary">注入</button>
+    </div>
+  </fieldset>
+</form>
+
+<script>
+    function onSelected(obj) {
+        if($(obj).val() == "否"){
+            $('#out_date').attr('disabled',"disabled");
+        }
+        else {
+            $('#out_date').removeAttr("disabled");
+        }
+    }
+</script>

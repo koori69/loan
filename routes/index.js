@@ -258,6 +258,8 @@ router.post("/detailed_insert", multipartMiddleware, function(req, res) {
 //            throw err;
 //        }
 //    });
+
+    // TODO: don't forget to delete all req.files when done
     req.flash("success", "导入成功");
     return res.redirect("/detailed_insert");
 });
