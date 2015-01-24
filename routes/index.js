@@ -252,38 +252,58 @@ router.post("/detailed_insert", multipartMiddleware, function(req, res) {
     console.log("File uploaded: " + req.files.upload_excel.path);
 
     var data = req.files.upload_excel.name;
-    var opt = {
+    var options = {
         method: "POST",
         host: "localhost",
         port: 8081,
         path: "loan/api/loan-application/save-by-excel",
-        headers: {
-            "Content-Type": 'application/text',
-            "Content-Length": data.length
-        }
+//        headers: {
+//            "Content-Type": 'application/text',
+//            "Content-Length": data.length
+//        }
     };
 
-    console.log("Param: " + opt);
-    var postFileName = http.request(opt, function (serverFeedback) {
-        if (serverFeedback.statusCode == 200) {
-            var body = "";
-            serverFeedback.on('data', function (data) { body += data; })
-                          .on('end', function () {
-                                req.flash("error", "导入成功");
-                                return res.redirect("/detailed_insert");
-                            });
-        }
-        else {
-            req.flash("error", "导入失败");
-            return res.redirect("/detailed_insert");
-        }
-    });
-    postFileName.write(data + "\n");
-    postFileName.end();
+//    console.log("Param: " + opt.toString());
+//    var postFileName = http.request(opt, function (serverFeedback) {
+//        if (serverFeedback.statusCode == 200) {
+//            var body = "";
+//            serverFeedback.on('data', function (data) { body += data; })
+//                          .on('end', function () {
+//                                req.flash("success", "导入成功");
+//                                return res.redirect("/detailed_insert");
+//                            });
+//        }
+//        else {
+//            req.flash("error", "导入失败");
+//            return res.redirect("/detailed_insert");
+//        }
+//    });
+//    postFileName.write(data + "\n");
+//    postFileName.end();
+//
+//    // TODO: don't forget to delete all req.files when done
+//    req.flash("success", "导入成功");
+//    return res.redirect("/detailed_insert");
 
-    // TODO: don't forget to delete all req.files when done
-    req.flash("success", "导入成功");
-    return res.redirect("/detailed_insert");
+
+    var reqHttps = https.request(options, function(resHttps) {
+        console.log("statusCode: ", resHttps.statusCode);
+        console.log("headers: ", resHttps.headers);
+
+        resHttps.setEncoding('utf8');
+        resHttps.on('data', function (body1) {
+            console.log("body:" + body1);
+        });
+    });
+
+    // write data to request body
+    reqHttps.write(post_data);
+    reqHttps.end();
+    reqHttps.on('error', function(e) {
+        console.error("error: " + e);
+        req.flash("error", "导入失败");
+        return res.redirect("/detailed_insert");
+    });
 });
 
 //router.post('/pool_test', checkLogin);
