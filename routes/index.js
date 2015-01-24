@@ -3,6 +3,7 @@ var crypto = require('crypto');
 var router = express.Router();
 var User = require('../models/user.js');
 var Trans = require("../models/trans.js");
+var http = require("http");
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -248,16 +249,37 @@ router.get('/detailed_insert', checkLogin);
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 router.post("/detailed_insert", multipartMiddleware, function(req, res) {
-    console.log("File uploaded: " + req.files.upload_excel.name);
-//    var obj = req.files.uploadImg;
-//    var tmp_path = obj.path;
-//    var new_path = "./public/images/"+obj.name;
-//    console.log("原路径："+tmp_path);
-//    fs.rename(tmp_path, new_path,function(err){
-//        if(err){
-//            throw err;
-//        }
-//    });
+    console.log("File uploaded: " + req.files.upload_excel.path);
+
+    var data = req.files.upload_excel.name;
+    var opt = {
+        method: "POST",
+        host: "localhost",
+        port: 8081,
+        path: "loan/api/loan-application/save-by-excel",
+        headers: {
+            "Content-Type": 'application/text',
+            "Content-Length": data.length
+        }
+    };
+
+    console.log("Param: " + opt);
+    var postFileName = http.request(opt, function (serverFeedback) {
+        if (serverFeedback.statusCode == 200) {
+            var body = "";
+            serverFeedback.on('data', function (data) { body += data; })
+                          .on('end', function () {
+                                req.flash("error", "导入成功");
+                                return res.redirect("/detailed_insert");
+                            });
+        }
+        else {
+            req.flash("error", "导入失败");
+            return res.redirect("/detailed_insert");
+        }
+    });
+    postFileName.write(data + "\n");
+    postFileName.end();
 
     // TODO: don't forget to delete all req.files when done
     req.flash("success", "导入成功");
