@@ -256,7 +256,7 @@ router.post("/detailed_insert", multipartMiddleware, function(req, res) {
         method: "POST",
         host: "localhost",
         port: 8081,
-        path: "loan/api/loan-application/save-by-excel?filePath=" + data
+        path: "/loan/api/loan-application/save-by-excel?filePath=" + data
     };
 
     console.log("Param: " + opt.toString());
@@ -265,6 +265,7 @@ router.post("/detailed_insert", multipartMiddleware, function(req, res) {
             var body = "";
             serverFeedback.on('data', function (data) { body += data; })
                           .on('end', function () {
+                                // TODO: don't forget to delete all req.files when done
                                 req.flash("success", "导入成功");
                                 return res.redirect("/detailed_insert");
                             });
@@ -276,10 +277,6 @@ router.post("/detailed_insert", multipartMiddleware, function(req, res) {
     });
     postFileName.write(data + "\n");
     postFileName.end();
-
-    // TODO: don't forget to delete all req.files when done
-    req.flash("success", "导入成功");
-    return res.redirect("/detailed_insert");
 });
 
 //router.post('/pool_test', checkLogin);
