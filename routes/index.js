@@ -256,7 +256,7 @@ router.post("/detailed_insert", multipartMiddleware, function(req, res) {
         method: "POST",
         host: "localhost",
         port: 8081,
-        path: "loan/api/loan-application/save-by-excel",
+        path: "loan/api/loan-application/save-by-excel?filePath=" + data
 //        headers: {
 //            "Content-Type": 'application/text',
 //            "Content-Length": data.length
