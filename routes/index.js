@@ -259,8 +259,9 @@ router.post("/detailed_insert", multipartMiddleware, function(req, res) {
         path: "/loan/api/loan-application/save-by-excel?filePath=" + data
     };
 
-    console.log("Param: " + opt.toString());
+    console.log("Param: " + opt.path);
     var postFileName = http.request(opt, function (serverFeedback) {
+        console.log(serverFeedback.statusCode);
         if (serverFeedback.statusCode == 200) {
             var body = "";
             serverFeedback.on('data', function (data) { body += data; })
