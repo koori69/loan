@@ -3,6 +3,8 @@ var crypto = require('crypto');
 var router = express.Router();
 var User = require('../models/user.js');
 var Trans = require("../models/trans.js");
+var loanApp = require("../models/loanapp.js");
+var http = require("http");
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -248,46 +250,49 @@ router.get('/detailed_insert', checkLogin);
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 router.post("/detailed_insert", multipartMiddleware, function(req, res) {
-    console.log("File uploaded: " + req.files.upload_excel.name);
-//    var obj = req.files.uploadImg;
-//    var tmp_path = obj.path;
-//    var new_path = "./public/images/"+obj.name;
-//    console.log("原路径："+tmp_path);
-//    fs.rename(tmp_path, new_path,function(err){
-//        if(err){
-//            throw err;
-//        }
-//    });
+    console.log("File uploaded: " + req.files.upload_excel.path);
 
-    // TODO: don't forget to delete all req.files when done
-    req.flash("success", "导入成功");
-    return res.redirect("/detailed_insert");
+    var data = req.files.upload_excel.path;
+    var opt = {
+        method: "POST",
+        host: "localhost",
+        port: 8081,
+        path: "/loan/api/loan-application/save-by-excel?filePath=" + data
+    };
+
+    console.log("Param: " + opt.path);
+    var postFileName = http.request(opt, function (serverFeedback) {
+        console.log(serverFeedback.statusCode);
+        if (serverFeedback.statusCode == 200) {
+            var body = "";
+            serverFeedback.on('data', function (data) { body += data; })
+                          .on('end', function () {
+                                // TODO: don't forget to delete all req.files when done
+                                req.flash("success", "导入成功");
+                                return res.redirect("/detailed_insert");
+                            });
+        }
+        else {
+            req.flash("error", "导入失败");
+            return res.redirect("/detailed_insert");
+        }
+    });
+    postFileName.write(data + "\n");
+    postFileName.end();
 });
 
-//router.post('/pool_test', checkLogin);
-//router.post('/pool_test', function(req, res) {
-//    console.log(req.body);
-//    res.json({
-//        "total_rows": "200",
-//        "page_data": [
-//            {
-//                customer_id: 1001,
-//                lastname: "操",
-//                firstname: "曹",
-//                email: "caocao@gmail.com",
-//                genfer: "男",
-//                date_updated: "2014-11-10"
-//            }
-//        ]
-//    })
-//});
-
-  router.get('/detailed', checkLogin);
-  router.get('/detailed', function(req, res) {
-    res.render('detailed', {
-      title: '借款明细'
+router.get('/detailed', checkLogin);
+router.get('/detailed', function(req, res) {
+    loanApp.getAll(function(err, allLoan) {
+        res.render("detailed", {
+            title: "借款明细",
+            loan: allLoan
+        });
     });
-  });
+//    res.render('detailed', {
+//        title: '借款明细'
+//    });
+});
 
   router.get('/borrower', checkLogin);
   router.get('/borrower', function(req, res) {
