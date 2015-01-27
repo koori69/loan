@@ -13,5 +13,29 @@ function LoanApp(loanApp) {
     this.idNumber = loanApp.idNumber;
     this.loanLimit = loanApp.loanLimit;
     this.loanDate = loanApp.loanDate;
-
 }
+
+LoanApp.getAll = function getAll(callback) {
+    mongodb.open(function(err, db) {
+        if (err) {
+            return callback(err);
+        }
+
+        console.log("Trans.getAll, Open MongoDB succeed.");
+        db.collection('transaction', function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);
+            }
+
+            collection.find().toArray(function (err, docs) {
+                mongodb.close();
+                if (docs) {
+                    callback(err, docs);
+                } else {
+                    callback(err, null);
+                }
+            });
+        });
+    });
+};

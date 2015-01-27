@@ -24,10 +24,17 @@
                 </tr>
             </thead>
             <tbody>
+            <% loan.forEach(function (allLoan, index) { %>
                 <tr>
-                    <td>2015-01-24</td>
-                    <td>孙权</td>
+                    <td><%= allLoan.userName %></td>
+                    <td><%= allLoan.loanDate %></td>
                 </tr>
+        <%  }) %>
+
+                <!--<tr>-->
+                    <!--<td>2015-01-24</td>-->
+                    <!--<td>孙权</td>-->
+                <!--</tr>-->
             </tbody>
         </table>
     </div>

@@ -3,6 +3,7 @@ var crypto = require('crypto');
 var router = express.Router();
 var User = require('../models/user.js');
 var Trans = require("../models/trans.js");
+var loanApp = require("../models/loanapp.js");
 var http = require("http");
 
 /* GET home page. */
@@ -280,30 +281,18 @@ router.post("/detailed_insert", multipartMiddleware, function(req, res) {
     postFileName.end();
 });
 
-//router.post('/pool_test', checkLogin);
-//router.post('/pool_test', function(req, res) {
-//    console.log(req.body);
-//    res.json({
-//        "total_rows": "200",
-//        "page_data": [
-//            {
-//                customer_id: 1001,
-//                lastname: "操",
-//                firstname: "曹",
-//                email: "caocao@gmail.com",
-//                genfer: "男",
-//                date_updated: "2014-11-10"
-//            }
-//        ]
-//    })
-//});
-
-  router.get('/detailed', checkLogin);
-  router.get('/detailed', function(req, res) {
-    res.render('detailed', {
-      title: '借款明细'
+router.get('/detailed', checkLogin);
+router.get('/detailed', function(req, res) {
+    loanApp.getAll(function(err, allLoan) {
+        res.render("detailed", {
+            title: "借款明细",
+            loan: allLoan
+        });
     });
-  });
+//    res.render('detailed', {
+//        title: '借款明细'
+//    });
+});
 
   router.get('/borrower', checkLogin);
   router.get('/borrower', function(req, res) {
