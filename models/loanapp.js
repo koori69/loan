@@ -21,8 +21,8 @@ LoanApp.getAll = function getAll(callback) {
             return callback(err);
         }
 
-        console.log("Trans.getAll, Open MongoDB succeed.");
-        db.collection('transaction', function (err, collection) {
+        console.log("LoanApp.getAll, Open MongoDB succeed.");
+        db.collection('loanApplication', function (err, collection) {
             if (err) {
                 mongodb.close();
                 return callback(err);
