@@ -251,7 +251,7 @@ var multipartMiddleware = multipart();
 router.post("/detailed_insert", multipartMiddleware, function(req, res) {
     console.log("File uploaded: " + req.files.upload_excel.path);
 
-    var data = req.files.upload_excel.name;
+    var data = req.files.upload_excel.path;
     var opt = {
         method: "POST",
         host: "localhost",
