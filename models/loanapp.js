@@ -14,6 +14,7 @@ function LoanApp(loanApp) {
     this.loanLimit = loanApp.loanLimit;
     this.loanDate = loanApp.loanDate;
 }
+module.exports = LoanApp;
 
 LoanApp.getAll = function getAll(callback) {
     mongodb.open(function(err, db) {
