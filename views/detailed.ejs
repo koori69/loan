@@ -42,9 +42,9 @@
         <div class="navbar">
             <div class="nav-collapse container">
                 <ul class="nav">
-                    <li class="alert alert-info" onclick="showdiv(1);">借款人基本信息</li>
-                    <li class="alert alert-success" onclick="showdiv(2);">担保人{1}</li>
-                    <li class="alert alert-info" onclick="showdiv(3);">担保人{2}</li>
+                    <li class="alert alert-success" onclick="showdiv(1,this);">借款人基本信息</li>
+                    <li class="alert alert-info" onclick="showdiv(2,this);">担保人{1}</li>
+                    <li class="alert alert-info" onclick="showdiv(3,this);">担保人{2}</li>
                 </ul>
             </div>
 
@@ -244,31 +244,55 @@
 <script>
     $(document).ready(function() {
     $('#left_funder').dataTable( {
-        "oPaginate": "bootstrap"
+      //  "oPaginate": "bootstrap"
+        "sScrollX": "100%",
+        "sScrollXInner": "110%",
+        "bScrollCollapse": true,
+ //       "bAutoWidth": true,//自动宽度
+        "sPaginationType": "full_numbers", //分页，一共两种样式，full_numbers和two_button(默认)
+      //  "bFilter": true,//搜索栏
+        "oLanguage": {
+            "sLengthMenu": "每页显示 _MENU_ 条数据",
+            "sZeroRecords": "对不起，查询不到任何相关数据",
+            "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条数据",
+            "sInfoEmtpy": "找不到相关数据",
+            "sInfoFiltered": "数据表中共为 _MAX_ 条记录)",
+            "sProcessing": "正在加载中...",
+            "sSearch": "搜索",
+            "sUrl": "", //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
+            "oPaginate": {
+                "sFirst":    "首页",
+                "sPrevious": "上一页",
+                "sNext":     "下一页",
+                "sLast":     "尾页"
+            }
+        } //多语言配置
+ //       "aLengthMenu": [[10, 25, 50, -1, 0], ["每页10条", "每页25条", "每页50条", "显示所有数据", "不显示数据"]]  //设置每页显示记录的下拉菜单
     } );
-      /*  var h = $(document).height();
-        if(h<550){
-            $(".left").height(550);
-            $(".content").height(550);
-        }
-        else{
-            $(".left").height(h);
-            $(".content").height(h);
-        }*/
 } );
-    function showdiv(i){
+    function showdiv(i,obj){
+        $("li").removeClass("alert-success").removeClass("alert-info");
         if(i == 1){
             $("#loan").removeClass().show();
             $("#gua1").removeClass().hide();
             $("#gua2").removeClass().hide();
+            $(obj).addClass("alert-success");
+            $(obj).next().addClass("alert-info");
+            $(obj).next().next().addClass("alert-info");
         }else if(i == 2){
             $("#loan").removeClass().hide();
             $("#gua1").removeClass().show();
             $("#gua2").removeClass().hide();
+            $(obj).addClass("alert-success");
+            $(obj).prev().addClass("alert-info");
+            $(obj).next().addClass("alert-info");
         }else if(i == 3){
             $("#loan").removeClass().hide();
             $("#gua1").removeClass().hide();
             $("#gua2").removeClass().show();
+            $(obj).addClass("alert-success");
+            $(obj).prev().addClass("alert-info");
+            $(obj).prev().prev().addClass("alert-info");
         }
     }
 </script>
