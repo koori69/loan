@@ -42,44 +42,233 @@
         <div class="navbar">
             <div class="nav-collapse container">
                 <ul class="nav">
-                    <li><a>借款人基本信息</a></li>
-                    <li><a>担保人{1}</a></li>
-                    <li><a>担保人{2}</a></li>
+                    <li class="alert alert-info" onclick="showdiv(1);">借款人基本信息</li>
+                    <li class="alert alert-success" onclick="showdiv(2);">担保人{1}</li>
+                    <li class="alert alert-info" onclick="showdiv(3);">担保人{2}</li>
                 </ul>
             </div>
+
+        </div>
+        <!-- 借款人-->
+        <div id="loan">
             <!--借款人基本信息 -->
             <div>
+                <div class="alert alert-info" >借款人基本信息</div>
                 <div>
-                    <span><label>姓名：</label>{name}</span>
-                    <span><label>性别：</label>{sex}</span>
-                    <span><label>年龄：</label>{age}</span>
-                    <span><label>婚史：</label>{age}</span>
+                    <span class="label-info">姓名：</span>
+                    <span>{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">性别：</span>
+                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">年龄：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">婚史：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">手机号：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
-
+                <div class="top">
+                    <span class="label-info">现地址：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">户籍地址：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">所属权：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">身份证号码：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">借款额度：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">借款日期：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">借款用途：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">利息周期：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">从事行业：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-info">约定还款日期：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">介绍人：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">经手人：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
             </div>
             <!--借款人基本信息 end -->
 
-            <!--担保人{1} -->
+            <!-- 借款人家庭信息-->
             <div>
-
+                <div class="alert alert-success" style="margin-top: 20px;">借款人家庭信息</div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span>父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span>{address}</span>
+                </div>
             </div>
-            <!--担保人{1} end -->
-
-            <!--担保人{2} -->
-            <div>
-
-            </div>
-            <!--担保人{2} end -->
+            <!-- 借款人家庭信息 end-->
         </div>
+        <!-- 借款人 end-->
+        <!--担保人{1} -->
+        <div class="hide" id="gua1">
+            <div>
+                <div class="alert alert-info" >担保人基本信息</div>
+                <div>
+                    <span class="label-info">姓名：</span>
+                    <span>{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">性别：</span>
+                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">年龄：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">婚史：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">手机号：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-info">现地址：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">户籍地址：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">所属权：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">身份证号码：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">从事行业：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            <div>
+                <div class="alert alert-success" style="margin-top: 20px;">担保人家庭信息</div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span>父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span>{address}</span>
+                </div>
+            </div>
+        </div>
+        <!--担保人{1} end -->
 
-    </div>
+        <!--担保人{2} -->
+        <div id="gua2" class="hide">
+            <div>
+                <div class="alert alert-info" >担保人基本信息</div>
+                <div>
+                    <span class="label-info">姓名：</span>
+                    <span>{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">性别：</span>
+                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">年龄：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">婚史：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">手机号：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-info">现地址：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">户籍地址：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">所属权：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">身份证号码：</span>
+                    <span>{address}</span>
+                </div>
+                <div class="top">
+                    <span class="label-info">从事行业：</span>
+                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            <div>
+                <div class="alert alert-success" style="margin-top: 20px;">担保人家庭信息</div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span>父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span>{address}</span>
+                </div>
+            </div>
+        </div>
+        <!--担保人{2} end -->
+
+        </div>
 </div>
-
 
 <script>
     $(document).ready(function() {
     $('#left_funder').dataTable( {
         "oPaginate": "bootstrap"
     } );
+      /*  var h = $(document).height();
+        if(h<550){
+            $(".left").height(550);
+            $(".content").height(550);
+        }
+        else{
+            $(".left").height(h);
+            $(".content").height(h);
+        }*/
 } );
+    function showdiv(i){
+        if(i == 1){
+            $("#loan").removeClass().show();
+            $("#gua1").removeClass().hide();
+            $("#gua2").removeClass().hide();
+        }else if(i == 2){
+            $("#loan").removeClass().hide();
+            $("#gua1").removeClass().show();
+            $("#gua2").removeClass().hide();
+        }else if(i == 3){
+            $("#loan").removeClass().hide();
+            $("#gua1").removeClass().hide();
+            $("#gua2").removeClass().show();
+        }
+    }
 </script>
