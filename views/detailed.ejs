@@ -26,7 +26,7 @@
             <tbody>
             <% loan.forEach(function (oneLoan) { %>
                 <tr>
-                    <td onclick="getLoanInfo(<%= oneLoan %>);"><%= oneLoan.userName %></td>
+                    <td onclick="getLoanInfo('<%= oneLoan._id %>');"><%= oneLoan.userName %></td>
                     <td><%= oneLoan.loanDate %></td>
                 </tr>
         <%  }) %>
@@ -242,6 +242,10 @@
 </div>
 
 <script>
+    var list = new Array();
+    <% loan.forEach(function (oneLoan) {%>
+    list.push(<%- JSON.stringify(oneLoan)%>);
+    <%})%>
     $(document).ready(function() {
     $('#left_funder').dataTable( {
       //  "oPaginate": "bootstrap"
@@ -296,9 +300,14 @@
         }
     }
 
-    function getLoanInfo(loan) {
-        alert(1);
-        alert(loan);
-        $("userName").text(loan.userName);
+    function getLoanInfo(obj) {
+        var json;
+        for(var i = 0; i < list.length; ++i){
+            json = list[i];
+            if(json._id == obj){
+                alert(json.userName);
+                $("#userName").html(json.userName);
+            }
+        }
     }
 </script>
