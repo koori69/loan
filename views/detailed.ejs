@@ -26,7 +26,7 @@
             <tbody>
             <% loan.forEach(function (oneLoan) { %>
                 <tr>
-                    <td onclick="getLoanInfo('<%= oneLoan._id %>');"><%= oneLoan.userName %></td>
+                    <td onclick="getLoanInfo('<%= oneLoan._id %>');"><a style="cursor:pointer"><%= oneLoan.userName %></a></td>
                     <td><%= oneLoan.loanDate %></td>
                 </tr>
         <%  }) %>
@@ -56,53 +56,53 @@
                 <div class="alert alert-info" >借款人基本信息</div>
                 <div>
                     <span class="label-info">姓名：</span>
-                    <span id="userName">{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerName">{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">性别：</span>
-                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerSex">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">年龄：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerAge">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">婚史：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerMarriage">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">手机号：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerMobile">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="top">
                     <span class="label-info">现地址：</span>
-                    <span>{address}</span>
+                    <span id="loanerPresentAddress">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">户籍地址：</span>
-                    <span>{address}</span>
+                    <span id="loanerPermanentAddress">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">所属权：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerOwnership">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">身份证号码：</span>
-                    <span>{address}</span>
+                    <span id="loanerIdNumber">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">借款额度：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerLoanLimit">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">借款日期：</span>
-                    <span>{address}</span>
+                    <span id="loanerLoanDate">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">利息周期：</span>
+                    <span id="loanerInterestPeriod">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">借款用途：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="label-info">利息周期：</span>
-                    <span>{address}</span>
-                </div>
-                <div class="top">
+                    <span id="loanerLoanPurpose">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">抵押物：</span>
+                    <span id="loanerPawn">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">从事行业：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerCareer">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="top">
                     <span class="label-info">约定还款日期：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="repaymentDate">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">介绍人：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="introducer">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">经手人：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="handledBy">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             </div>
             <!--借款人基本信息 end -->
@@ -242,10 +242,11 @@
 </div>
 
 <script>
-    var list = new Array();
+    var gLoanList = new Array();
     <% loan.forEach(function (oneLoan) {%>
-    list.push(<%- JSON.stringify(oneLoan)%>);
+    gLoanList.push(<%- JSON.stringify(oneLoan)%>);
     <%})%>
+
     $(document).ready(function() {
     $('#left_funder').dataTable( {
       //  "oPaginate": "bootstrap"
@@ -301,12 +302,30 @@
     }
 
     function getLoanInfo(obj) {
-        var json;
-        for(var i = 0; i < list.length; ++i){
-            json = list[i];
-            if(json._id == obj){
-                alert(json.userName);
-                $("#userName").html(json.userName);
+        var oneLoan;
+        for(var i = 0; i < gLoanList.length; ++i){
+            oneLoan = gLoanList[i];
+            if(oneLoan._id == obj){
+//                alert(oneLoan.userName);
+                $("#loanerName").html(oneLoan.userName);
+                $("#loanerSex").html(oneLoan.sex);
+                $("#loanerAge").html(oneLoan.age);
+                $("#loanerMarriage").html(oneLoan.marriage);
+                $("#loanerMobile").html(oneLoan.mobile);
+//                $("#userName").html(oneLoan.userName);
+                $("#loanerPresentAddress").html(oneLoan.presentAddress);
+                $("#loanerOwnership").html(oneLoan.ownership);
+                $("#loanerPermanentAddress").html(oneLoan.permanentAddress);
+                $("#loanerIdNumber").html(oneLoan.idNumber);
+                $("#loanerLoanLimit").html(oneLoan.loanLimit);
+                $("#loanerLoanDate").html(oneLoan.loanDate);
+                $("#loanerLoanPurpose").html(oneLoan.loanPurpose);
+                $("#loanerInterestPeriod").html(oneLoan.interestPeriod);
+                $("#loanerCareer").html(oneLoan.career);
+                $("#loanerPawn").html(oneLoan.pawn);
+                $("#repaymentDate").html(oneLoan.repaymentDate);
+                $("#introducer").html(oneLoan.introducer);
+                $("#handledBy").html(oneLoan.handledBy);
             }
         }
     }
