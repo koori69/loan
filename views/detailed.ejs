@@ -24,10 +24,10 @@
                 </tr>
             </thead>
             <tbody>
-            <% loan.forEach(function (allLoan, index) { %>
+            <% loan.forEach(function (oneLoan) { %>
                 <tr>
-                    <td><%= allLoan.userName %></td>
-                    <td><%= allLoan.loanDate %></td>
+                    <td onclick="getLoanInfo(<%= oneLoan %>);"><%= oneLoan.userName %></td>
+                    <td><%= oneLoan.loanDate %></td>
                 </tr>
         <%  }) %>
 
@@ -56,7 +56,7 @@
                 <div class="alert alert-info" >借款人基本信息</div>
                 <div>
                     <span class="label-info">姓名：</span>
-                    <span>{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="userName">{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">性别：</span>
                     <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">年龄：</span>
@@ -294,5 +294,11 @@
             $(obj).prev().addClass("alert-info");
             $(obj).prev().prev().addClass("alert-info");
         }
+    }
+
+    function getLoanInfo(loan) {
+        alert(1);
+        alert(loan);
+        $("userName").text(loan.userName);
     }
 </script>
