@@ -32,7 +32,7 @@
         <div id="loan">
             <!--借款人基本信息 -->
             <div>
-                <div class="alert alert-info" >借款人基本信息</div>
+                <div class="alert alert-info">借款人基本信息</div>
                 <div>
                     <span class="label-info">姓名：</span>
                     <span id="loanerName">{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -89,7 +89,7 @@
             <!-- 借款人家庭信息-->
             <div>
                 <div class="alert alert-success" style="margin-top: 20px;">借款人家庭信息</div>
-                <div>
+                <div class="top">
                     <span class="label-success">关系：</span>
                     <span id="loanerFamilyrs0">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">姓名：</span>
@@ -98,12 +98,12 @@
                     <span id="loanerFamilysex0">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">年龄：</span>
                     <span id="loanerFamilyage0">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="top">
+                <!--</div>-->
+                <!--<div class="top">-->
                     <span class="label-success">现居住地址、工作单位及电话号码：</span>
                     <span id="loanerFamilyde0">{address}</span>
                 </div>
-                <div>
+                <div class="top">
                     <span class="label-success">关系：</span>
                     <span id="loanerFamilyrs1">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">姓名：</span>
@@ -112,12 +112,12 @@
                     <span id="loanerFamilysex1">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">年龄：</span>
                     <span id="loanerFamilyage1">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="top">
+                <!--</div>-->
+                <!--<div class="top">-->
                     <span class="label-success">现居住地址、工作单位及电话号码：</span>
                     <span id="loanerFamilyde1">{address}</span>
                 </div>
-                <div>
+                <div class="top">
                     <span class="label-success">关系：</span>
                     <span id="loanerFamilyrs2">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">姓名：</span>
@@ -126,12 +126,12 @@
                     <span id="loanerFamilysex2">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">年龄：</span>
                     <span id="loanerFamilyage2">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="top">
+                <!--</div>-->
+                <!--<div class="top">-->
                     <span class="label-success">现居住地址、工作单位及电话号码：</span>
                     <span id="loanerFamilyde2">{address}</span>
                 </div>
-                <div>
+                <div class="top">
                     <span class="label-success">关系：</span>
                     <span id="loanerFamilyrs3">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">姓名：</span>
@@ -140,8 +140,8 @@
                     <span id="loanerFamilysex3">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">年龄：</span>
                     <span id="loanerFamilyage3">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="top">
+                <!--</div>-->
+                <!--<div class="top">-->
                     <span class="label-success">现居住地址、工作单位及电话号码：</span>
                     <span id="loanerFamilyde3">{address}</span>
                 </div>
@@ -350,6 +350,8 @@
     gLoanList.push(<%- JSON.stringify(oneLoan)%>);
     <%})%>
 
+    setValue(gLoanList[0]);
+
     $(document).ready(function() {
     $('#left_funder').dataTable( {
       //  "oPaginate": "bootstrap"
@@ -404,115 +406,118 @@
         }
     }
 
+    function setValue(oneLoan) {
+        $("#loanerName").html(oneLoan.userName);
+        $("#loanerSex").html(oneLoan.sex);
+        $("#loanerAge").html(oneLoan.age);
+        $("#loanerMarriage").html(oneLoan.marriage);
+        $("#loanerMobile").html(oneLoan.mobile);
+    //                $("#userName").html(oneLoan.userName);
+        $("#loanerPresentAddress").html(oneLoan.presentAddress);
+        $("#loanerOwnership").html(oneLoan.ownership);
+        $("#loanerPermanentAddress").html(oneLoan.permanentAddress);
+        $("#loanerIdNumber").html(oneLoan.idNumber);
+        $("#loanerLoanLimit").html(oneLoan.loanLimit);
+        $("#loanerLoanDate").html(oneLoan.loanDate);
+        $("#loanerLoanPurpose").html(oneLoan.loanPurpose);
+        $("#loanerInterestPeriod").html(oneLoan.interestPeriod);
+        $("#loanerCareer").html(oneLoan.career);
+        $("#loanerPawn").html(oneLoan.pawn);
+        $("#repaymentDate").html(oneLoan.repaymentDate);
+        $("#introducer").html(oneLoan.introducer);
+        $("#handledBy").html(oneLoan.handledBy);
+        $("#loanerFamilyrs0").html(oneLoan.familyInformation[0].relationship);
+        $("#loanerFamilyun0").html(oneLoan.familyInformation[0].userName);
+        $("#loanerFamilysex0").html(oneLoan.familyInformation[0].sex);
+        $("#loanerFamilyage0").html(oneLoan.familyInformation[0].age);
+        $("#loanerFamilyde0").html(oneLoan.familyInformation[0].details);
+        $("#loanerFamilyrs1").html(oneLoan.familyInformation[1].relationship);
+        $("#loanerFamilyun1").html(oneLoan.familyInformation[1].userName);
+        $("#loanerFamilysex1").html(oneLoan.familyInformation[1].sex);
+        $("#loanerFamilyage1").html(oneLoan.familyInformation[1].age);
+        $("#loanerFamilyde1").html(oneLoan.familyInformation[1].details);
+        $("#loanerFamilyrs2").html(oneLoan.familyInformation[2].relationship);
+        $("#loanerFamilyun2").html(oneLoan.familyInformation[2].userName);
+        $("#loanerFamilysex2").html(oneLoan.familyInformation[2].sex);
+        $("#loanerFamilyage2").html(oneLoan.familyInformation[2].age);
+        $("#loanerFamilyde2").html(oneLoan.familyInformation[2].details);
+        $("#loanerFamilyrs3").html(oneLoan.familyInformation[3].relationship);
+        $("#loanerFamilyun3").html(oneLoan.familyInformation[3].userName);
+        $("#loanerFamilysex3").html(oneLoan.familyInformation[3].sex);
+        $("#loanerFamilyage3").html(oneLoan.familyInformation[3].age);
+        $("#loanerFamilyde3").html(oneLoan.familyInformation[3].details);
+
+        //  第一担保人
+        $("#guarantor1UserName").html(oneLoan.guarantor[0].userInformation.userName);
+        $("#guarantor1Sex").html(oneLoan.guarantor[0].userInformation.sex);
+        $("#guarantor1Age").html(oneLoan.guarantor[0].userInformation.age);
+        $("#guarantor1Marriage").html(oneLoan.guarantor[0].userInformation.marriage);
+        $("#guarantor1Mobile").html(oneLoan.guarantor[0].userInformation.mobile);
+        $("#guarantor1PresentAddress").html(oneLoan.guarantor[0].userInformation.presentAddress);
+    //                $("#guarantor1PermanentAddress").html(oneLoan.guarantor[0].userInformation.permanentAddress);
+        $("#guarantor1Ownership").html(oneLoan.guarantor[0].userInformation.ownership);
+        $("#guarantor1IdNumber").html(oneLoan.guarantor[0].userInformation.idNumber);
+        $("#guarantor1Career").html(oneLoan.guarantor[0].userInformation.career);
+        $("#guarantor1Familyrs0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].relationship);
+        $("#guarantor1Familyun0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].userName);
+        $("#guarantor1Familysex0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].sex);
+        $("#guarantor1Familyage0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].age);
+        $("#guarantor1Familyde0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].details);
+        $("#guarantor1Familyrs1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].relationship);
+        $("#guarantor1Familyun1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].userName);
+        $("#guarantor1Familysex1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].sex);
+        $("#guarantor1Familyage1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].age);
+        $("#guarantor1Familyde1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].details);
+        $("#guarantor1Familyrs2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].relationship);
+        $("#guarantor1Familyun2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].userName);
+        $("#guarantor1Familysex2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].sex);
+        $("#guarantor1Familyage2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].age);
+        $("#guarantor1Familyde2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].details);
+        $("#guarantor1Familyrs3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].relationship);
+        $("#guarantor1Familyun3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].userName);
+        $("#guarantor1Familysex3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].sex);
+        $("#guarantor1Familyage3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].age);
+        $("#guarantor1Familyde3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].details);
+
+        //  第二担保人
+        $("#guarantor2UserName").html(oneLoan.guarantor[1].userInformation.userName);
+        $("#guarantor2Sex").html(oneLoan.guarantor[1].userInformation.sex);
+        $("#guarantor2Age").html(oneLoan.guarantor[1].userInformation.age);
+        $("#guarantor2Marriage").html(oneLoan.guarantor[1].userInformation.marriage);
+        $("#guarantor2Mobile").html(oneLoan.guarantor[1].userInformation.mobile);
+        $("#guarantor2PresentAddress").html(oneLoan.guarantor[1].userInformation.presentAddress);
+    //                $("#guarantor2PermanentAddress").html(oneLoan.guarantor[1].userInformation.permanentAddress);
+        $("#guarantor2Ownership").html(oneLoan.guarantor[1].userInformation.ownership);
+        $("#guarantor2IdNumber").html(oneLoan.guarantor[1].userInformation.idNumber);
+        $("#guarantor2Career").html(oneLoan.guarantor[1].userInformation.career);
+        $("#guarantor2Familyrs0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].relationship);
+        $("#guarantor2Familyun0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].userName);
+        $("#guarantor2Familysex0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].sex);
+        $("#guarantor2Familyage0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].age);
+        $("#guarantor2Familyde0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].details);
+        $("#guarantor2Familyrs1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].relationship);
+        $("#guarantor2Familyun1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].userName);
+        $("#guarantor2Familysex1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].sex);
+        $("#guarantor2Familyage1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].age);
+        $("#guarantor2Familyde1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].details);
+        $("#guarantor2Familyrs2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].relationship);
+        $("#guarantor2Familyun2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].userName);
+        $("#guarantor2Familysex2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].sex);
+        $("#guarantor2Familyage2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].age);
+        $("#guarantor2Familyde2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].details);
+        $("#guarantor2Familyrs3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].relationship);
+        $("#guarantor2Familyun3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].userName);
+        $("#guarantor2Familysex3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].sex);
+        $("#guarantor2Familyage3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].age);
+        $("#guarantor2Familyde3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].details);
+    }
     function getLoanInfo(obj) {
         var oneLoan;
         for(var i = 0; i < gLoanList.length; ++i){
             oneLoan = gLoanList[i];
             if(oneLoan._id == obj){
 //                alert(oneLoan.userName);
-                $("#loanerName").html(oneLoan.userName);
-                $("#loanerSex").html(oneLoan.sex);
-                $("#loanerAge").html(oneLoan.age);
-                $("#loanerMarriage").html(oneLoan.marriage);
-                $("#loanerMobile").html(oneLoan.mobile);
-//                $("#userName").html(oneLoan.userName);
-                $("#loanerPresentAddress").html(oneLoan.presentAddress);
-                $("#loanerOwnership").html(oneLoan.ownership);
-                $("#loanerPermanentAddress").html(oneLoan.permanentAddress);
-                $("#loanerIdNumber").html(oneLoan.idNumber);
-                $("#loanerLoanLimit").html(oneLoan.loanLimit);
-                $("#loanerLoanDate").html(oneLoan.loanDate);
-                $("#loanerLoanPurpose").html(oneLoan.loanPurpose);
-                $("#loanerInterestPeriod").html(oneLoan.interestPeriod);
-                $("#loanerCareer").html(oneLoan.career);
-                $("#loanerPawn").html(oneLoan.pawn);
-                $("#repaymentDate").html(oneLoan.repaymentDate);
-                $("#introducer").html(oneLoan.introducer);
-                $("#handledBy").html(oneLoan.handledBy);
-                $("#loanerFamilyrs0").html(oneLoan.familyInformation[0].relationship);
-                $("#loanerFamilyun0").html(oneLoan.familyInformation[0].userName);
-                $("#loanerFamilysex0").html(oneLoan.familyInformation[0].sex);
-                $("#loanerFamilyage0").html(oneLoan.familyInformation[0].age);
-                $("#loanerFamilyde0").html(oneLoan.familyInformation[0].details);
-                $("#loanerFamilyrs1").html(oneLoan.familyInformation[1].relationship);
-                $("#loanerFamilyun1").html(oneLoan.familyInformation[1].userName);
-                $("#loanerFamilysex1").html(oneLoan.familyInformation[1].sex);
-                $("#loanerFamilyage1").html(oneLoan.familyInformation[1].age);
-                $("#loanerFamilyde1").html(oneLoan.familyInformation[1].details);
-                $("#loanerFamilyrs2").html(oneLoan.familyInformation[2].relationship);
-                $("#loanerFamilyun2").html(oneLoan.familyInformation[2].userName);
-                $("#loanerFamilysex2").html(oneLoan.familyInformation[2].sex);
-                $("#loanerFamilyage2").html(oneLoan.familyInformation[2].age);
-                $("#loanerFamilyde2").html(oneLoan.familyInformation[2].details);
-                $("#loanerFamilyrs3").html(oneLoan.familyInformation[3].relationship);
-                $("#loanerFamilyun3").html(oneLoan.familyInformation[3].userName);
-                $("#loanerFamilysex3").html(oneLoan.familyInformation[3].sex);
-                $("#loanerFamilyage3").html(oneLoan.familyInformation[3].age);
-                $("#loanerFamilyde3").html(oneLoan.familyInformation[3].details);
-
-                //  第一担保人
-                $("#guarantor1UserName").html(oneLoan.guarantor[0].userInformation.userName);
-                $("#guarantor1Sex").html(oneLoan.guarantor[0].userInformation.sex);
-                $("#guarantor1Age").html(oneLoan.guarantor[0].userInformation.age);
-                $("#guarantor1Marriage").html(oneLoan.guarantor[0].userInformation.marriage);
-                $("#guarantor1Mobile").html(oneLoan.guarantor[0].userInformation.mobile);
-                $("#guarantor1PresentAddress").html(oneLoan.guarantor[0].userInformation.presentAddress);
-//                $("#guarantor1PermanentAddress").html(oneLoan.guarantor[0].userInformation.permanentAddress);
-                $("#guarantor1Ownership").html(oneLoan.guarantor[0].userInformation.ownership);
-                $("#guarantor1IdNumber").html(oneLoan.guarantor[0].userInformation.idNumber);
-                $("#guarantor1Career").html(oneLoan.guarantor[0].userInformation.career);
-                $("#guarantor1Familyrs0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].relationship);
-                $("#guarantor1Familyun0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].userName);
-                $("#guarantor1Familysex0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].sex);
-                $("#guarantor1Familyage0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].age);
-                $("#guarantor1Familyde0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].details);
-                $("#guarantor1Familyrs1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].relationship);
-                $("#guarantor1Familyun1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].userName);
-                $("#guarantor1Familysex1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].sex);
-                $("#guarantor1Familyage1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].age);
-                $("#guarantor1Familyde1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].details);
-                $("#guarantor1Familyrs2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].relationship);
-                $("#guarantor1Familyun2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].userName);
-                $("#guarantor1Familysex2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].sex);
-                $("#guarantor1Familyage2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].age);
-                $("#guarantor1Familyde2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].details);
-                $("#guarantor1Familyrs3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].relationship);
-                $("#guarantor1Familyun3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].userName);
-                $("#guarantor1Familysex3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].sex);
-                $("#guarantor1Familyage3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].age);
-                $("#guarantor1Familyde3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].details);
-
-                //  第二担保人
-                $("#guarantor2UserName").html(oneLoan.guarantor[1].userInformation.userName);
-                $("#guarantor2Sex").html(oneLoan.guarantor[1].userInformation.sex);
-                $("#guarantor2Age").html(oneLoan.guarantor[1].userInformation.age);
-                $("#guarantor2Marriage").html(oneLoan.guarantor[1].userInformation.marriage);
-                $("#guarantor2Mobile").html(oneLoan.guarantor[1].userInformation.mobile);
-                $("#guarantor2PresentAddress").html(oneLoan.guarantor[1].userInformation.presentAddress);
-//                $("#guarantor2PermanentAddress").html(oneLoan.guarantor[1].userInformation.permanentAddress);
-                $("#guarantor2Ownership").html(oneLoan.guarantor[1].userInformation.ownership);
-                $("#guarantor2IdNumber").html(oneLoan.guarantor[1].userInformation.idNumber);
-                $("#guarantor2Career").html(oneLoan.guarantor[1].userInformation.career);
-                $("#guarantor2Familyrs0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].relationship);
-                $("#guarantor2Familyun0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].userName);
-                $("#guarantor2Familysex0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].sex);
-                $("#guarantor2Familyage0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].age);
-                $("#guarantor2Familyde0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].details);
-                $("#guarantor2Familyrs1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].relationship);
-                $("#guarantor2Familyun1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].userName);
-                $("#guarantor2Familysex1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].sex);
-                $("#guarantor2Familyage1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].age);
-                $("#guarantor2Familyde1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].details);
-                $("#guarantor2Familyrs2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].relationship);
-                $("#guarantor2Familyun2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].userName);
-                $("#guarantor2Familysex2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].sex);
-                $("#guarantor2Familyage2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].age);
-                $("#guarantor2Familyde2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].details);
-                $("#guarantor2Familyrs3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].relationship);
-                $("#guarantor2Familyun3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].userName);
-                $("#guarantor2Familysex3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].sex);
-                $("#guarantor2Familyage3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].age);
-                $("#guarantor2Familyde3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].details);
+                setValue(oneLoan);
             }
         }
     }
