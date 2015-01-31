@@ -32,3 +32,5 @@ a{color: #00B7FF;}
     background-color: #468847;
     border-radius: 3px;
 }
+.right-width1{width:60px;display:inline-block;}
+.right-width2{width:100px;display:inline-block;}
