@@ -1,21 +1,5 @@
 <div class="row-fluid">
-    <div class="span4">
-        <!--<div>-->
-            <!--<ul class="breadcrumb">-->
-                <!--<li>-->
-                    <!--基本功能：-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--分页 <span class="divider">/</span>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--排序 <span class="divider">/</span>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--搜索-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
+    <div class="span3">
         <table class="table table-striped table-bordered table-hover table-condensed datatable" id="left_funder">
             <thead>
                 <tr>
@@ -26,25 +10,20 @@
             <tbody>
             <% loan.forEach(function (oneLoan) { %>
                 <tr>
-                    <td onclick="getLoanInfo('<%= oneLoan._id %>');"><%= oneLoan.userName %></td>
+                    <td onclick="getLoanInfo('<%= oneLoan._id %>');"><a style="cursor:pointer"><%= oneLoan.userName %></a></td>
                     <td><%= oneLoan.loanDate %></td>
                 </tr>
         <%  }) %>
-
-                <!--<tr>-->
-                    <!--<td>2015-01-24</td>-->
-                    <!--<td>孙权</td>-->
-                <!--</tr>-->
             </tbody>
         </table>
     </div>
-    <div class="span8">
+    <div class="span9">
         <div class="navbar">
             <div class="nav-collapse container">
                 <ul class="nav">
-                    <li class="alert alert-success" onclick="showdiv(1,this);">借款人基本信息</li>
-                    <li class="alert alert-info" onclick="showdiv(2,this);">担保人{1}</li>
-                    <li class="alert alert-info" onclick="showdiv(3,this);">担保人{2}</li>
+                    <li class="alert alert-success" onclick="showdiv(1,this);"><a style="cursor:pointer">借款人基本信息</a></li>
+                    <li class="alert alert-info" onclick="showdiv(2,this);"><a style="cursor:pointer">第一担保人</a></li>
+                    <li class="alert alert-info" onclick="showdiv(3,this);"><a style="cursor:pointer">第二担保人</a></li>
                 </ul>
             </div>
 
@@ -56,53 +35,53 @@
                 <div class="alert alert-info" >借款人基本信息</div>
                 <div>
                     <span class="label-info">姓名：</span>
-                    <span id="userName">{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerName">{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">性别：</span>
-                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerSex">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">年龄：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerAge">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">婚史：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerMarriage">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">手机号：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerMobile">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="top">
                     <span class="label-info">现地址：</span>
-                    <span>{address}</span>
+                    <span id="loanerPresentAddress">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">户籍地址：</span>
-                    <span>{address}</span>
+                    <span id="loanerPermanentAddress">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">所属权：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerOwnership">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">身份证号码：</span>
-                    <span>{address}</span>
+                    <span id="loanerIdNumber">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">借款额度：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerLoanLimit">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">借款日期：</span>
-                    <span>{address}</span>
+                    <span id="loanerLoanDate">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">利息周期：</span>
+                    <span id="loanerInterestPeriod">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">借款用途：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="label-info">利息周期：</span>
-                    <span>{address}</span>
-                </div>
-                <div class="top">
+                    <span id="loanerLoanPurpose">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-info">抵押物：</span>
+                    <span id="loanerPawn">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">从事行业：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerCareer">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="top">
                     <span class="label-info">约定还款日期：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="repaymentDate">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">介绍人：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="introducer">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">经手人：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="handledBy">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             </div>
             <!--借款人基本信息 end -->
@@ -112,140 +91,265 @@
                 <div class="alert alert-success" style="margin-top: 20px;">借款人家庭信息</div>
                 <div>
                     <span class="label-success">关系：</span>
-                    <span>父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerFamilyrs0">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">姓名：</span>
-                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerFamilyun0">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">性别：</span>
-                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerFamilysex0">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">年龄：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="loanerFamilyage0">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="top">
                     <span class="label-success">现居住地址、工作单位及电话号码：</span>
-                    <span>{address}</span>
+                    <span id="loanerFamilyde0">{address}</span>
+                </div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span id="loanerFamilyrs1">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span id="loanerFamilyun1">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span id="loanerFamilysex1">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span id="loanerFamilyage1">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span id="loanerFamilyde1">{address}</span>
+                </div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span id="loanerFamilyrs2">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span id="loanerFamilyun2">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span id="loanerFamilysex2">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span id="loanerFamilyage2">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span id="loanerFamilyde2">{address}</span>
+                </div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span id="loanerFamilyrs3">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span id="loanerFamilyun3">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span id="loanerFamilysex3">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span id="loanerFamilyage3">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span id="loanerFamilyde3">{address}</span>
                 </div>
             </div>
             <!-- 借款人家庭信息 end-->
         </div>
         <!-- 借款人 end-->
-        <!--担保人{1} -->
+        <!--第一担保人-->
         <div class="hide" id="gua1">
             <div>
                 <div class="alert alert-info" >担保人基本信息</div>
                 <div>
                     <span class="label-info">姓名：</span>
-                    <span>{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor1UserName">{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">性别：</span>
-                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor1Sex">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">年龄：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor1Age">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">婚史：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor1Marriage">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">手机号：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor1Mobile">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="top">
                     <span class="label-info">现地址：</span>
-                    <span>{address}</span>
+                    <span id="guarantor1PresentAddress">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">户籍地址：</span>
-                    <span>{address}</span>
+                    <span id="guarantor1PermanentAddress">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">所属权：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor1Ownership">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">身份证号码：</span>
-                    <span>{address}</span>
+                    <span id="guarantor1IdNumber">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">从事行业：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor1Career">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             </div>
             <div>
                 <div class="alert alert-success" style="margin-top: 20px;">担保人家庭信息</div>
                 <div>
                     <span class="label-success">关系：</span>
-                    <span>父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor1Familyrs0">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">姓名：</span>
-                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor1Familyun0">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">性别：</span>
-                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="guarantor1Familysex0">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">年龄：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor1Familyage0">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="top">
                     <span class="label-success">现居住地址、工作单位及电话号码：</span>
-                    <span>{address}</span>
+                    <span id="guarantor1Familyde0">{address}</span>
+                </div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span id="guarantor1Familyrs1">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span id="guarantor1Familyun1">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span class="guarantor1Familysex1">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span id="guarantor1Familyage1">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span id="guarantor1Familyde1">{address}</span>
+                </div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span id="guarantor1Familyrs2">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span id="guarantor1Familyun2">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span class="guarantor1Familysex2">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span id="guarantor1Familyage2">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span id="guarantor1Familyde2">{address}</span>
+                </div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span id="guarantor1Familyrs3">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span id="guarantor1Familyun3">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span class="guarantor1Familysex3">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span id="guarantor1Familyage3">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span id="guarantor1Familyde3">{address}</span>
                 </div>
             </div>
         </div>
         <!--担保人{1} end -->
 
-        <!--担保人{2} -->
-        <div id="gua2" class="hide">
+
+        <div class="hide" id="gua2">
             <div>
                 <div class="alert alert-info" >担保人基本信息</div>
                 <div>
                     <span class="label-info">姓名：</span>
-                    <span>{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor2UserName">{name}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">性别：</span>
-                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor2Sex">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">年龄：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor2Age">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">婚史：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor2Marriage">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">手机号：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor2Mobile">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="top">
                     <span class="label-info">现地址：</span>
-                    <span>{address}</span>
+                    <span id="guarantor2PresentAddress">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">户籍地址：</span>
-                    <span>{address}</span>
+                    <span id="guarantor2PermanentAddress">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">所属权：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor2Ownership">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-info">身份证号码：</span>
-                    <span>{address}</span>
+                    <span id="guarantor2IdNumber">{address}</span>
                 </div>
                 <div class="top">
                     <span class="label-info">从事行业：</span>
-                    <span>{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor2Career">{address}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             </div>
             <div>
                 <div class="alert alert-success" style="margin-top: 20px;">担保人家庭信息</div>
                 <div>
                     <span class="label-success">关系：</span>
-                    <span>父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor2Familyrs0">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">姓名：</span>
-                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor2Familyun0">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">性别：</span>
-                    <span>{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="guarantor2Familysex0">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label-success">年龄：</span>
-                    <span>{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="guarantor2Familyage0">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="top">
                     <span class="label-success">现居住地址、工作单位及电话号码：</span>
-                    <span>{address}</span>
+                    <span id="guarantor2Familyde0">{address}</span>
+                </div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span id="guarantor2Familyrs1">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span id="guarantor2Familyun1">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span class="guarantor2Familysex1">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span id="guarantor2Familyage1">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span id="guarantor2Familyde1">{address}</span>
+                </div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span id="guarantor2Familyrs2">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span id="guarantor2Familyun2">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span class="guarantor2Familysex2">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span id="guarantor2Familyage2">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span id="guarantor2Familyde2">{address}</span>
+                </div>
+                <div>
+                    <span class="label-success">关系：</span>
+                    <span id="guarantor2Familyrs3">父亲</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">姓名：</span>
+                    <span id="guarantor2Familyun3">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">性别：</span>
+                    <span class="guarantor2Familysex3">{sex}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label-success">年龄：</span>
+                    <span id="guarantor2Familyage3">{age}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="top">
+                    <span class="label-success">现居住地址、工作单位及电话号码：</span>
+                    <span id="guarantor1Familyde3">{address}</span>
                 </div>
             </div>
         </div>
-        <!--担保人{2} end -->
-
-        </div>
+    </div>
 </div>
 
 <script>
-    var list = new Array();
+    var gLoanList = new Array();
     <% loan.forEach(function (oneLoan) {%>
-    list.push(<%- JSON.stringify(oneLoan)%>);
+    gLoanList.push(<%- JSON.stringify(oneLoan)%>);
     <%})%>
+
     $(document).ready(function() {
     $('#left_funder').dataTable( {
       //  "oPaginate": "bootstrap"
@@ -301,12 +405,114 @@
     }
 
     function getLoanInfo(obj) {
-        var json;
-        for(var i = 0; i < list.length; ++i){
-            json = list[i];
-            if(json._id == obj){
-                alert(json.userName);
-                $("#userName").html(json.userName);
+        var oneLoan;
+        for(var i = 0; i < gLoanList.length; ++i){
+            oneLoan = gLoanList[i];
+            if(oneLoan._id == obj){
+//                alert(oneLoan.userName);
+                $("#loanerName").html(oneLoan.userName);
+                $("#loanerSex").html(oneLoan.sex);
+                $("#loanerAge").html(oneLoan.age);
+                $("#loanerMarriage").html(oneLoan.marriage);
+                $("#loanerMobile").html(oneLoan.mobile);
+//                $("#userName").html(oneLoan.userName);
+                $("#loanerPresentAddress").html(oneLoan.presentAddress);
+                $("#loanerOwnership").html(oneLoan.ownership);
+                $("#loanerPermanentAddress").html(oneLoan.permanentAddress);
+                $("#loanerIdNumber").html(oneLoan.idNumber);
+                $("#loanerLoanLimit").html(oneLoan.loanLimit);
+                $("#loanerLoanDate").html(oneLoan.loanDate);
+                $("#loanerLoanPurpose").html(oneLoan.loanPurpose);
+                $("#loanerInterestPeriod").html(oneLoan.interestPeriod);
+                $("#loanerCareer").html(oneLoan.career);
+                $("#loanerPawn").html(oneLoan.pawn);
+                $("#repaymentDate").html(oneLoan.repaymentDate);
+                $("#introducer").html(oneLoan.introducer);
+                $("#handledBy").html(oneLoan.handledBy);
+                $("#loanerFamilyrs0").html(oneLoan.familyInformation[0].relationship);
+                $("#loanerFamilyun0").html(oneLoan.familyInformation[0].userName);
+                $("#loanerFamilysex0").html(oneLoan.familyInformation[0].sex);
+                $("#loanerFamilyage0").html(oneLoan.familyInformation[0].age);
+                $("#loanerFamilyde0").html(oneLoan.familyInformation[0].details);
+                $("#loanerFamilyrs1").html(oneLoan.familyInformation[1].relationship);
+                $("#loanerFamilyun1").html(oneLoan.familyInformation[1].userName);
+                $("#loanerFamilysex1").html(oneLoan.familyInformation[1].sex);
+                $("#loanerFamilyage1").html(oneLoan.familyInformation[1].age);
+                $("#loanerFamilyde1").html(oneLoan.familyInformation[1].details);
+                $("#loanerFamilyrs2").html(oneLoan.familyInformation[2].relationship);
+                $("#loanerFamilyun2").html(oneLoan.familyInformation[2].userName);
+                $("#loanerFamilysex2").html(oneLoan.familyInformation[2].sex);
+                $("#loanerFamilyage2").html(oneLoan.familyInformation[2].age);
+                $("#loanerFamilyde2").html(oneLoan.familyInformation[2].details);
+                $("#loanerFamilyrs3").html(oneLoan.familyInformation[3].relationship);
+                $("#loanerFamilyun3").html(oneLoan.familyInformation[3].userName);
+                $("#loanerFamilysex3").html(oneLoan.familyInformation[3].sex);
+                $("#loanerFamilyage3").html(oneLoan.familyInformation[3].age);
+                $("#loanerFamilyde3").html(oneLoan.familyInformation[3].details);
+
+                //  第一担保人
+                $("#guarantor1UserName").html(oneLoan.guarantor[0].userInformation.userName);
+                $("#guarantor1Sex").html(oneLoan.guarantor[0].userInformation.sex);
+                $("#guarantor1Age").html(oneLoan.guarantor[0].userInformation.age);
+                $("#guarantor1Marriage").html(oneLoan.guarantor[0].userInformation.marriage);
+                $("#guarantor1Mobile").html(oneLoan.guarantor[0].userInformation.mobile);
+                $("#guarantor1PresentAddress").html(oneLoan.guarantor[0].userInformation.presentAddress);
+//                $("#guarantor1PermanentAddress").html(oneLoan.guarantor[0].userInformation.permanentAddress);
+                $("#guarantor1Ownership").html(oneLoan.guarantor[0].userInformation.ownership);
+                $("#guarantor1IdNumber").html(oneLoan.guarantor[0].userInformation.idNumber);
+                $("#guarantor1Career").html(oneLoan.guarantor[0].userInformation.career);
+                $("#guarantor1Familyrs0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].relationship);
+                $("#guarantor1Familyun0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].userName);
+                $("#guarantor1Familysex0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].sex);
+                $("#guarantor1Familyage0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].age);
+                $("#guarantor1Familyde0").html(oneLoan.guarantor[0].guarantorFamilyInformation[0].details);
+                $("#guarantor1Familyrs1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].relationship);
+                $("#guarantor1Familyun1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].userName);
+                $("#guarantor1Familysex1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].sex);
+                $("#guarantor1Familyage1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].age);
+                $("#guarantor1Familyde1").html(oneLoan.guarantor[0].guarantorFamilyInformation[1].details);
+                $("#guarantor1Familyrs2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].relationship);
+                $("#guarantor1Familyun2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].userName);
+                $("#guarantor1Familysex2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].sex);
+                $("#guarantor1Familyage2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].age);
+                $("#guarantor1Familyde2").html(oneLoan.guarantor[0].guarantorFamilyInformation[2].details);
+                $("#guarantor1Familyrs3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].relationship);
+                $("#guarantor1Familyun3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].userName);
+                $("#guarantor1Familysex3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].sex);
+                $("#guarantor1Familyage3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].age);
+                $("#guarantor1Familyde3").html(oneLoan.guarantor[0].guarantorFamilyInformation[3].details);
+
+                //  第二担保人
+                $("#guarantor2UserName").html(oneLoan.guarantor[1].userInformation.userName);
+                $("#guarantor2Sex").html(oneLoan.guarantor[1].userInformation.sex);
+                $("#guarantor2Age").html(oneLoan.guarantor[1].userInformation.age);
+                $("#guarantor2Marriage").html(oneLoan.guarantor[1].userInformation.marriage);
+                $("#guarantor2Mobile").html(oneLoan.guarantor[1].userInformation.mobile);
+                $("#guarantor2PresentAddress").html(oneLoan.guarantor[1].userInformation.presentAddress);
+//                $("#guarantor2PermanentAddress").html(oneLoan.guarantor[1].userInformation.permanentAddress);
+                $("#guarantor2Ownership").html(oneLoan.guarantor[1].userInformation.ownership);
+                $("#guarantor2IdNumber").html(oneLoan.guarantor[1].userInformation.idNumber);
+                $("#guarantor2Career").html(oneLoan.guarantor[1].userInformation.career);
+                $("#guarantor2Familyrs0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].relationship);
+                $("#guarantor2Familyun0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].userName);
+                $("#guarantor2Familysex0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].sex);
+                $("#guarantor2Familyage0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].age);
+                $("#guarantor2Familyde0").html(oneLoan.guarantor[1].guarantorFamilyInformation[0].details);
+                $("#guarantor2Familyrs1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].relationship);
+                $("#guarantor2Familyun1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].userName);
+                $("#guarantor2Familysex1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].sex);
+                $("#guarantor2Familyage1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].age);
+                $("#guarantor2Familyde1").html(oneLoan.guarantor[1].guarantorFamilyInformation[1].details);
+                $("#guarantor2Familyrs2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].relationship);
+                $("#guarantor2Familyun2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].userName);
+                $("#guarantor2Familysex2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].sex);
+                $("#guarantor2Familyage2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].age);
+                $("#guarantor2Familyde2").html(oneLoan.guarantor[1].guarantorFamilyInformation[2].details);
+                $("#guarantor2Familyrs3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].relationship);
+                $("#guarantor2Familyun3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].userName);
+                $("#guarantor2Familysex3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].sex);
+                $("#guarantor2Familyage3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].age);
+                $("#guarantor2Familyde3").html(oneLoan.guarantor[1].guarantorFamilyInformation[3].details);
             }
         }
     }
