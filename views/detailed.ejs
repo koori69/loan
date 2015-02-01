@@ -1,6 +1,6 @@
 <div class="row-fluid">
     <div class="span3">
-        <table class="table table-striped table-bordered table-hover table-condensed datatable" id="left_funder">
+        <table class="table table-striped table-bordered" id="left_funder">
             <thead>
                 <tr>
                     <th>借款日期</th>
@@ -343,6 +343,7 @@
         </div>
     </div>
 </div>
+<script src="/javascripts/dataTables.bootstrap.js"></script>
 
 <script>
     var gLoanList = new Array();
@@ -353,12 +354,15 @@
     setValue(gLoanList[0]);
 
     $(document).ready(function() {
+//        $('#left_funder').dataTable();
     $('#left_funder').dataTable( {
       //  "oPaginate": "bootstrap"
         "sScrollX": "100%",
         "sScrollXInner": "110%",
         "bScrollCollapse": true,
- //       "bAutoWidth": true,//自动宽度
+        "bLengthChange":false,
+        "iDisplayLength":2, //每页显示记录数
+ //       "bAutoWidth": false,//自动宽度
         "sPaginationType": "full_numbers", //分页，一共两种样式，full_numbers和two_button(默认)
       //  "bFilter": true,//搜索栏
         "oLanguage": {
